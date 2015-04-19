@@ -16,4 +16,6 @@ public class BakeryDbContext : DbContext
         //
         Configuration.LazyLoadingEnabled = false;
     }
+
+    public DbSet<Product> Products { get; set; }
 }
