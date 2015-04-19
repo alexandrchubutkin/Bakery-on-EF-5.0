@@ -1,9 +1,9 @@
 ﻿@{
     Page.Title = "Домашняя страница";
 
-    var db = Database.Open("bakery");
-    var products = db.Query("SELECT * FROM PRODUCTS").ToList();
-    var featured = products[new Random().Next(products.Count)];
+    var db = new BakeryDbContext();
+    var products = db.Products.ToList();
+    var features = products[new Random().Next(products.Count)];
 }
 
 <h1>Добро пожаловать в Fourth Coffee!</h1>

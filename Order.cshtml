@@ -6,9 +6,9 @@
 @{
     Page.Title = "Разместите заказ";
 
-    var db = Database.Open("bakery");
+    var db = new BakeryDbContext();
     var productId = UrlData[0].AsInt();
-    var product = db.QuerySingle("SELECT * FROM PRODUCTS WHERE ID = @0", productId);
+    var product = db.Products.Where(p => p.ProductId == productId).FirstOrDefault();
 
     if (product == null) {
         Response.Redirect("~/");
