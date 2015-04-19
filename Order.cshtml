@@ -22,6 +22,19 @@
         var email = Request["orderEmail"];
         var shipping = Request["orderShipping"];
 
+        var customer = db.Customers.Where(c => c.Email.ToLower() == email.ToLower()).FirstOrDefault();   
+        if (customer == null) {
+            customer = new Customer() { Email = email, AddressShipping = shipping, 
+                PeriodOfFirstRegister = DateTime.Now };
+            db.Customers.Add(customer);
+        }
+
+        customer.Orders.Add(new Order() { Period = DateTime.Now, Product = product /* or ProductId = product.ProductId */, 
+            Price = product.Price, Count = Request["orderQty"].AsInt(), 
+            Total = product.Price * Request["orderQty"].AsDecimal() });
+
+        db.SaveChanges();
+
         //Если ошибок нет, попробуйте обработать заказ
         var body = "Спасибо, получен ваш заказ на " + Request["orderQty"] + " шт. " + product.Name + "!<br/>";
         var orderShipping = Request["orderShipping"];
