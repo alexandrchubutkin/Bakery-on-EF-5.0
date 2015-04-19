@@ -14,6 +14,6 @@ public class BakeryDbContext : DbContext
         //
         // TODO: Add constructor logic here
         //
-        this.Configuration.LazyLoadingEnabled = false;
+        Configuration.LazyLoadingEnabled = false;
     }
 }
