@@ -15,6 +15,7 @@ public class BakeryDbContext : DbContext
         // TODO: Add constructor logic here
         //
         Configuration.LazyLoadingEnabled = false;
+        Database.SetInitializer<BakeryDbContext>(new BakeryDbContextInitializer<BakeryDbContext>());
     }
 
     public DbSet<Product> Products { get; set; }
